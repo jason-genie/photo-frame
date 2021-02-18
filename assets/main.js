@@ -63,11 +63,9 @@ window.updatePreview = function(url) {
   });
 
   document.getElementById("download").onclick = function(){
-    this.innerHTML = "Selfie wird hochgeladen... Bitte warten...";
-    uploadPicture(function(r){
-      document.getElementById("download").innerHTML = "Erfolgreich hochgeladen";
-      window.location = "download.php?i=" + r;
-    });
+    document.getElementById("download").href = canvas.toDataURL(
+      { format: 'png' }
+    );
   };
   document.getElementById("download").removeAttribute("disabled");
 };

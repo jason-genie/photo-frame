@@ -49,11 +49,12 @@ html, body{
 }
 #download{
   padding: 10px 20px;
-  background: #ffffff;
-  color: #000000;
+  background: #ff0000;
+  color: #ffffff;
   font-size: 1em;
   border-radius: 10px;
   outline: none;
+  text-decoration: none;
 }
 #fb-set-pic{
   background-color: #4267b2;
