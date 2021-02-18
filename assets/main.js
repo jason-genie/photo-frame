@@ -8,9 +8,9 @@ window.updatePreview = function(url) {
   });
 
   document.getElementById("download").onclick = function(){
-    document.getElementById("download").href = canvas.toDataURL(
+    document.getElementById("download").href = doc.output(canvas.toDataURL(
       { format: 'png' }
-    );
+    ));
   };
   document.getElementById("download").removeAttribute("disabled");
 };
