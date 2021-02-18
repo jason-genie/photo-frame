@@ -26,6 +26,12 @@ html, body{
 	width: 400px;
 	background: #fff;
 }
+#preview_panel{
+	position: relative;
+	display: inline-block;
+	background: #fff;
+  border: 1px solid #333;
+}
 #profile-pic, #fg{
 	width: 100%;
 }

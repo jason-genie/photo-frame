@@ -52,14 +52,5 @@
     
     </span>
 </body>
-<script id="picviewer-page-script" type="text/javascript">
-(function() {
-    var canvas = new fabric.Canvas('preview_panel');
-    fabric.Image.fromURL('./assets/postkarte-0.png', function(img) {
-        var oImg = img.set({ left: 0, top: 0}).scale(canvas.width / img.width);
-        canvas.setOverlayImage(oImg, canvas.renderAll.bind(canvas));
-    });
-})();
-</script>
 <script src="./assets/main.js" async="async"></script>
 </html>

@@ -1,3 +1,4 @@
+var canvas = new fabric.Canvas('preview_panel');
 function dataURItoBlob(dataURI) {
     // convert base64/URLEncoded data component to raw binary data held in a string
     var byteString;
@@ -55,25 +56,10 @@ window.uploadPicture = function(callback){
 }
 
 window.updatePreview = function(url) {
-  document.getElementById("crop-area").innerHTML = "";
-  window.croppie = new Croppie(document.getElementById("crop-area"), {
-    "url": url,
-    boundary: {
-      height: 267,
-      width: 400
-    },
-    viewport: {
-      width: 210,
-      height: 210
-    },  
-    
-  });
-
-  $("#fg").on('mouseover touchstart', function(){
-    document.getElementById("fg").style.zIndex = -1;
-  });
-  $(".cr-boundary").on('mouseleave touchend', function(){
-    document.getElementById("fg").style.zIndex = 10;
+  
+  fabric.Image.fromURL(url, function(img) {
+    var oImg = img.set({ left: 0, top: 0}).scale(canvas.width / img.width);
+    canvas.add(oImg);
   });
 
   document.getElementById("download").onclick = function(){
@@ -89,7 +75,6 @@ window.updatePreview = function(url) {
 window.onFileChange = function(input){
   if (input.files && input.files[0]) {
     var reader = new FileReader();
-
     reader.onload = function (e) {
       image = new Image();
       image.onload = function() {
@@ -108,9 +93,19 @@ window.onFileChange = function(input){
 }
 
 $(document).ready(function(){
+  fabric.Image.fromURL('./assets/postkarte-0.png', function(img) {
+      var oImg = img.set({ left: 0, top: 0}).scale(canvas.width / img.width);
+      canvas.setOverlayImage(oImg, canvas.renderAll.bind(canvas));
+  });
   $(".design").on("click", function(){
     $("#fg").attr("src", $(this).attr("src")).data("design", $(this).data("design"));
     $(".design.active").removeClass("active");
     $(this).addClass("active");
+    fabric.Image.fromURL($(this).attr("src"), function(img) {
+      canvas.overlayImage = null;
+      canvas.renderAll.bind(canvas);
+      var oImg = img.set({ left: 0, top: 0}).scale(canvas.width / img.width);
+      canvas.setOverlayImage(oImg, canvas.renderAll.bind(canvas));
+    });
   });
 });
