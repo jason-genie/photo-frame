@@ -1,8 +1,9 @@
 var canvas = new fabric.Canvas('preview_panel');
-
+var filename = 'filename.png';
+var ratio = 1;
 var download = function(){
   var link = document.createElement('a');
-  link.download = 'filename.png';
+  link.download = filename;
   link.href = canvas.toDataURL(
     { format: 'png' }
   );
@@ -12,7 +13,7 @@ var download = function(){
 window.updatePreview = function(url) {
   
   fabric.Image.fromURL(url, function(img) {
-    var oImg = img.set({ left: 0, top: 0}).scale(canvas.width / img.width);
+    var oImg = img.set({ left: 0, top: 0}).scale(ratio);
     canvas.add(oImg);
   });
 
@@ -25,6 +26,7 @@ window.updatePreview = function(url) {
 window.onFileChange = function(input){
   if (input.files && input.files[0]) {
     var reader = new FileReader();
+    filename = input.files[0].name;
     reader.onload = function (e) {
       image = new Image();
       image.onload = function() {
@@ -44,7 +46,8 @@ window.onFileChange = function(input){
 
 $(document).ready(function(){
   fabric.Image.fromURL('./assets/postkarte-0.png', function(img) {
-      var oImg = img.set({ left: 0, top: 0}).scale(canvas.width / img.width);
+      ratio = canvas.width / img.width;
+      var oImg = img.set({ left: 0, top: 0}).scale(ratio);
       canvas.setOverlayImage(oImg, canvas.renderAll.bind(canvas));
   });
   $(".design").on("click", function(){
@@ -54,7 +57,8 @@ $(document).ready(function(){
     fabric.Image.fromURL($(this).attr("src"), function(img) {
       canvas.overlayImage = null;
       canvas.renderAll.bind(canvas);
-      var oImg = img.set({ left: 0, top: 0}).scale(canvas.width / img.width);
+      ratio = canvas.width / img.width;
+      var oImg = img.set({ left: 0, top: 0}).scale(ratio);
       canvas.setOverlayImage(oImg, canvas.renderAll.bind(canvas));
     });
   });

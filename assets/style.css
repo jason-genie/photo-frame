@@ -31,6 +31,8 @@ html, body{
 	display: inline-block;
 	background: #fff;
   border: 1px solid #333;
+  height: 100%;
+  width: 99%;
 }
 #profile-pic, #fg{
 	width: 100%;
@@ -79,13 +81,4 @@ html, body{
 }
 #comments{
   margin: 20px;
-}
-@media screen and (max-width: 801px){
-	#content{
-		width: 100%;
-		margin: 0;
-	}
-  #comments{
-    margin: 20px 0;
-  }
 }
