@@ -1,5 +1,14 @@
 var canvas = new fabric.Canvas('preview_panel');
 
+var download = function(){
+  var link = document.createElement('a');
+  link.download = 'filename.png';
+  link.href = canvas.toDataURL(
+    { format: 'png' }
+  );
+  link.click();
+}
+
 window.updatePreview = function(url) {
   
   fabric.Image.fromURL(url, function(img) {
@@ -8,9 +17,7 @@ window.updatePreview = function(url) {
   });
 
   document.getElementById("download").onclick = function(){
-    document.getElementById("download").href = doc.output(canvas.toDataURL(
-      { format: 'png' }
-    ));
+    download();
   };
   document.getElementById("download").removeAttribute("disabled");
 };
