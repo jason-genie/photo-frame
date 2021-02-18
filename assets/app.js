@@ -33,7 +33,7 @@ window.uploadPicture = function(callback){
       processData: false,
       success: callback,
       error: function(){
-        document.getElementById("download").innerHTML = "Selfie Postkarte herunterladen";
+        document.getElementById("download").innerHTML = "Download";
       },
       xhr: function() {
         var myXhr = $.ajaxSettings.xhr();
@@ -44,7 +44,7 @@ window.uploadPicture = function(callback){
                 var current = e.loaded;
 
                 var percentage = Math.round((current * 100)/max);
-                document.getElementById("download").innerHTML = "Selfie wird hochgeladen... Bitte warten... " + percentage + "%";
+                document.getElementById("download").innerHTML = "Uploading... Please wait..." + percentage + "%";
               }
             }, false);
         }
