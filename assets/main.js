@@ -56,7 +56,6 @@ function freshCanvas() {
     imgRatio = img.width / img.height;
     var winWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     ocw = canvas.width;
-    och = canvas.height;
     cw = (winWidth * 0.5) > 250 ? (winWidth * 0.5) : 250;
     canvas.setWidth(cw);
     canvas.setHeight(cw / imgRatio);
@@ -77,30 +76,42 @@ $(document).ready(function(){
   });
 
   $(window).on('resize', function() {
-    freshCanvas();
-    var zoom = ocw / canvas.width;
-    var objects = canvas.getObjects();
-    for(var i in objects) {
-      var scaleX = objects[i].scaleX;
-      var scaleY = objects[i].scaleY;
-      var left = objects[i].left;
-      var top = objects[i].top;
-
-      var tempScaleX = scaleX * (1 / zoom);
-      var tempScaleY = scaleY * (1 / zoom);
-      var tempLeft = left * (1 / zoom);
-      var tempTop = top * (1 / zoom);
-
-      objects[i].scaleX = tempScaleX;
-      objects[i].scaleY = tempScaleY;
-      objects[i].left = tempLeft;
-      objects[i].top = tempTop;
-
-      objects[i].setCoords();
-    }
+    fabric.Image.fromURL($(".design.active").attr("src"), function(img) {
+      imgRatio = img.width / img.height;
+      var winWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+      ocw = canvas.width;
+      cw = (winWidth * 0.5) > 250 ? (winWidth * 0.5) : 250;
+      
+      var zoom = ocw / cw;
+      var objects = canvas.getObjects();
+      for(var i in objects) {
+        var scaleX = objects[i].scaleX;
+        var scaleY = objects[i].scaleY;
+        var left = objects[i].left;
+        var top = objects[i].top;
+  
+        var tempScaleX = scaleX * (1 / zoom);
+        var tempScaleY = scaleY * (1 / zoom);
+        var tempLeft = left * (1 / zoom);
+        var tempTop = top * (1 / zoom);
+  
+        objects[i].scaleX = tempScaleX;
+        objects[i].scaleY = tempScaleY;
+        objects[i].left = tempLeft;
+        objects[i].top = tempTop;
+  
+        objects[i].setCoords();
+      }
+      
+      canvas.setWidth(cw);
+      canvas.setHeight(cw / imgRatio);
+      imgMultiplier = canvas.width / img.width;
+      var oImg = img.set({ left: 0, top: 0}).scale(imgMultiplier);
+      canvas.setOverlayImage(oImg, canvas.renderAll.bind(canvas));
+    });
     canvas.renderAll.bind(canvas);
   });
-  
+
   canvas.on('mouse:over', function(e) {
     if (e.target == null)
       return;
