@@ -82,3 +82,18 @@ html, body{
 #comments{
   margin: 20px;
 }
+@media screen and (max-width: 970px){
+  .design{
+    height: 80px;
+  }
+}
+@media screen and (max-width: 801px){
+  .design{
+    height: 60px;
+  }
+}
+@media screen and (max-width: 614px){
+  .design{
+    height: 40px;
+  }
+}
