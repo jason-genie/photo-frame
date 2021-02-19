@@ -1,9 +1,12 @@
-var canvas = new fabric.Canvas('preview_panel');
+
+var defaultWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+var cw = (defaultWidth * 0.5) > 250 ? (defaultWidth * 0.5) : 250;
+var canvas = new fabric.Canvas('preview_panel', {width: cw, height:cw / 1280 * 853});
 var filename = 'filename.png';
 var imgMultiplier = 1;
 var imgRatio = 1;
-var ocw = 1280;
-var och = 853;
+var ocw = cw;
+var och = cw / 1280 * 853;
 
 var download = function(){
   var link = document.createElement('a');
@@ -48,15 +51,6 @@ window.onFileChange = function(input){
   }
 }
 
-// START RESPONSIVE CANVAS
-
-window.addEventListener('resize', resizeCanvas, false);
-
-function resizeCanvas() {
-  setCanvasZoom(ocw / canvas.width);
-  canvas.renderAll();    
-}
-
 function freshCanvas() {
   fabric.Image.fromURL($(".design.active").attr("src"), function(img) {
     imgRatio = img.width / img.height;
@@ -70,34 +64,7 @@ function freshCanvas() {
     var oImg = img.set({ left: 0, top: 0}).scale(imgMultiplier);
     canvas.setOverlayImage(oImg, canvas.renderAll.bind(canvas));
   });
-
-  canvas.renderAll.bind(canvas);
 }
-
-function setCanvasZoom(zoom) {
-  var objects = canvas.getObjects();
-  for(var i in objects) {
-    var scaleX = objects[i].scaleX;
-    var scaleY = objects[i].scaleY;
-    var left = objects[i].left;
-    var top = objects[i].top;
-
-    var tempScaleX = scaleX * (1 / zoom);
-    var tempScaleY = scaleY * (1 / zoom);
-    var tempLeft = left * (1 / zoom);
-    var tempTop = top * (1 / zoom);
-
-    objects[i].scaleX = tempScaleX;
-    objects[i].scaleY = tempScaleY;
-    objects[i].left = tempLeft;
-    objects[i].top = tempTop;
-
-    objects[i].setCoords();
-  }
-
-  freshCanvas();
-};
-// END RESPONSIVE CANVAS
 
 $(document).ready(function(){
   freshCanvas();
@@ -109,6 +76,31 @@ $(document).ready(function(){
     freshCanvas();
   });
 
+  $(window).on('resize', function() {
+    freshCanvas();
+    var zoom = ocw / canvas.width;
+    var objects = canvas.getObjects();
+    for(var i in objects) {
+      var scaleX = objects[i].scaleX;
+      var scaleY = objects[i].scaleY;
+      var left = objects[i].left;
+      var top = objects[i].top;
+
+      var tempScaleX = scaleX * (1 / zoom);
+      var tempScaleY = scaleY * (1 / zoom);
+      var tempLeft = left * (1 / zoom);
+      var tempTop = top * (1 / zoom);
+
+      objects[i].scaleX = tempScaleX;
+      objects[i].scaleY = tempScaleY;
+      objects[i].left = tempLeft;
+      objects[i].top = tempTop;
+
+      objects[i].setCoords();
+    }
+    canvas.renderAll.bind(canvas);
+  });
+  
   canvas.on('mouse:over', function(e) {
     if (e.target == null)
       return;
