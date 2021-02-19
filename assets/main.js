@@ -110,6 +110,8 @@ $(document).ready(function(){
   });
 
   canvas.on('mouse:over', function(e) {
+    if (e.target == null)
+      return;
     canvas.overlayImage.opacity = 0.5;
     canvas.renderAll();
   });
