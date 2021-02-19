@@ -19,13 +19,6 @@ html, body{
   background: #fff;
   color: #000;
 }
-#preview{
-	position: relative;
-	display: inline-block;
-	height: 267px;
-	width: 400px;
-	background: #fff;
-}
 #preview_panel{
 	position: relative;
 	display: inline-block;
@@ -33,21 +26,6 @@ html, body{
   border: 1px solid #333;
   height: 100%;
   width: 99%;
-}
-#profile-pic, #fg{
-	width: 100%;
-}
-#fg{
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: 10;
-}
-#fb-set-pic{
-  display: table;
-  margin: 20px auto;
 }
 #download{
   padding: 10px 20px;
@@ -57,16 +35,7 @@ html, body{
   border-radius: 10px;
   outline: none;
 }
-#fb-set-pic{
-  background-color: #4267b2;
-  border-color: #4267b2;
-  color: #fff;
-  font-size: 1em;
-  border-radius: 10px;
-  outline: none;
-  padding: 10px 20px;
-}
-#download[disabled], #fb-set-pic[disabled]{
+#download[disabled]{
   background: #CCC;
   color: #EEE;
   border: none;
@@ -78,9 +47,6 @@ html, body{
 }
 .design.active{
   border: 5px dashed #000;
-}
-#comments{
-  margin: 20px;
 }
 @media screen and (max-width: 970px){
   .design{

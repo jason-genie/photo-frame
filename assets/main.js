@@ -8,7 +8,7 @@ var imgRatio = 1;
 var ocw = cw;
 var och = cw / 1280 * 853;
 
-var download = function(){
+window.download = function() {
   var link = document.createElement('a');
   link.download = filename;
   link.href = canvas.toDataURL(
@@ -51,7 +51,7 @@ window.onFileChange = function(input){
   }
 }
 
-function freshCanvas() {
+window.freshCanvas = function(){
   fabric.Image.fromURL($(".design.active").attr("src"), function(img) {
     imgRatio = img.width / img.height;
     var winWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
