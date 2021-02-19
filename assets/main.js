@@ -38,9 +38,9 @@ window.updatePreview = function(url) {
     // Calc resize ratio to fit any overlay images to width or height of canvas
     var resizeRatio = (canvas.width / img.width) >  (canvas.height / img.height) ? (canvas.width / img.width) : (canvas.height / img.height);
     if (mobileCheck) {
-      canvas.overlayImage.opacity = 0.2;
+      canvas.overlayImage.opacity = 0.4;
       canvas.renderAll();
-      setTimeout(function(){canvas.overlayImage.opacity = 1; canvas.renderAll();}, 3000);
+      setTimeout(function(){canvas.overlayImage.opacity = 1; canvas.renderAll();}, 5000);
     }
     var oImg = img.set({ left: 0, top: 0, cornerColor: 'red'}).scale(resizeRatio);
     canvas.add(oImg);
@@ -153,44 +153,5 @@ $(document).ready(function(){
   canvas.on('mouse:out', function(e) {
     canvas.overlayImage.opacity = 1;
     canvas.renderAll();
-  });
-  
-  canvas.on({
-    'touch:gesture': function(e) {
-      console.log('touch:gesture');
-        if (e.e.touches && e.e.touches.length == 2) {
-            pausePanning = true;
-            var point = new fabric.Point(e.self.x, e.self.y);
-            if (e.self.state == "start") {
-                zoomStartScale = self.canvas.getZoom();
-            }
-            var delta = zoomStartScale * e.self.scale;
-            self.canvas.zoomToPoint(point, delta);
-            pausePanning = false;
-        }
-    },
-    'object:selected': function() {
-        pausePanning = true;
-    },
-    'selection:cleared': function() {
-        pausePanning = false;
-    },
-    'touch:drag': function(e) {
-      console.log('touch:drag');
-        if (pausePanning == false && undefined != e.e.layerX && undefined != e.e.layerY) {
-            currentX = e.e.layerX;
-            currentY = e.e.layerY;
-            xChange = currentX - lastX;
-            yChange = currentY - lastY;
-
-            if( (Math.abs(currentX - lastX) <= 50) && (Math.abs(currentY - lastY) <= 50)) {
-                var delta = new fabric.Point(xChange, yChange);
-                canvas.relativePan(delta);
-            }
-
-            lastX = e.e.layerX;
-            lastY = e.e.layerY;
-        }
-    }
   });
 });
