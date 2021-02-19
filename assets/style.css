@@ -13,7 +13,8 @@ html, body{
 }
 #content{
 	display: table;
-	margin: 0 10px;
+	margin: 20px auto;
+
   background: #fff;
   color: #000;
 }
