@@ -77,24 +77,22 @@ function freshCanvas() {
 function setCanvasZoom(zoom) {
   var objects = canvas.getObjects();
   for(var i in objects) {
-     var object = objects[i];
-    var scaleX = object.scaleX,
-      scaleY = object.scaleY,
-      left = object.left,
-      top = object.top;
-    
-    // preserve the original dimensions.
-    object.original_scaleX = !object.original_scaleX ? scaleX : object.original_scaleX;
-    object.original_scaleY = !object.original_scaleY ? scaleY : object.original_scaleY;
-    object.original_left = !object.original_left ? left : object.original_left;
-    object.original_top = !object.original_top ? top : object.original_top;
-    
-    object.scaleX = object.original_scaleX * zoom;
-    object.scaleY = object.original_scaleY * zoom;
-    object.left = object.original_left * zoom;
-    object.top = object.original_top * zoom;
-    
-    object.setCoords();
+    var scaleX = objects[i].scaleX;
+    var scaleY = objects[i].scaleY;
+    var left = objects[i].left;
+    var top = objects[i].top;
+
+    var tempScaleX = scaleX * (1 / zoom);
+    var tempScaleY = scaleY * (1 / zoom);
+    var tempLeft = left * (1 / zoom);
+    var tempTop = top * (1 / zoom);
+
+    objects[i].scaleX = tempScaleX;
+    objects[i].scaleY = tempScaleY;
+    objects[i].left = tempLeft;
+    objects[i].top = tempTop;
+
+    objects[i].setCoords();
   }
 
   freshCanvas();
@@ -109,5 +107,15 @@ $(document).ready(function(){
     $(".design.active").removeClass("active");
     $(this).addClass("active");
     freshCanvas();
+  });
+
+  canvas.on('mouse:over', function(e) {
+    canvas.overlayImage.opacity = 0.5;
+    canvas.renderAll();
+  });
+
+  canvas.on('mouse:out', function(e) {
+    canvas.overlayImage.opacity = 1;
+    canvas.renderAll();
   });
 });
