@@ -8,12 +8,12 @@ window.mobileCheck = function() {
 var ratioCanWin = (mobileCheck() == true) ? 0.9 : 0.5;
 var defaultWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 var cw = (defaultWidth * ratioCanWin) > 350 ? (defaultWidth * ratioCanWin) : 350;
-var canvas = new fabric.Canvas('preview_panel', {width: cw, height:cw / 1280 * 853});
+var canvas = new fabric.Canvas('preview_panel', {width: cw, height:cw / 620 * 874});
 var filename = 'filename.png';
 var imgMultiplier = 1;
 var imgRatio = 1;
 var ocw = cw;
-var och = cw / 1280 * 853;
+var och = cw / 620 * 874;
 
 /** Convert canvas to png and download it to local
  * format       : image file format (png)
@@ -66,10 +66,10 @@ window.onFileChange = function(input){
       image.onload = function() {
         var width = this.width;
         var height = this.height;
-        if(width >= 800 && height >= 800)
+        if(width >= 400 && height >= 400)
           updatePreview(e.target.result);
         else
-          alert("Das Selfie sollte mindestens 800px breit und 800px hoch sein.");
+          alert("Das Sollte sollte mindestens 400px breit und 400px hoch sein.");
       };
       image.src = e.target.result; 
     }

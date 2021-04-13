@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Create your selfie</title>
+    <title>Selfie-Postkarte erstellen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./assets/style.css" rel="stylesheet" async="async">
     <link href="./assets/prism.css" rel="stylesheet" async="async">
@@ -14,15 +14,17 @@
 <body>
     <div id="wrapper">
         <div id="content">
+           <img src="assets/title.png" width="80%">
             <canvas id="preview_panel">
             </canvas>
-            <p>
-                <button id="download" disabled="">Download</button>
-            </p>
-            <h2>Upload your photo</h2>
+          
             <input type="file" name="file" onchange="onFileChange(this)">
-            <h2>Select frame</h2>
-            <div id="designs">
+            
+              <p>
+                <button id="download" disabled="">Selfie-Postkarte jetzt herunterladen</button>
+            </p>
+            
+            <div id="designs" style="display:none;">
                 <img class="design active" src="./assets/postkarte-0.png" data-design="0">
                 <img class="design" src="./assets/postkarte-1.png" data-design="1">
                 <img class="design" src="./assets/postkarte-2.png" data-design="2">
