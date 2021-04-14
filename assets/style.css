@@ -10,15 +10,17 @@ html, body{
 	min-height: 100%;
 	background-color: #ffffff;
 	text-align: center;
-    background-image: url(https://selfie.iss.show/generator/assets/bg.jpg);
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url(./bg.jpg);
+  background-position: 0 0;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 #content{
-	display: table;
-	margin: 0px auto;
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: #ffffff00;
   color: #000;
 }
@@ -31,20 +33,12 @@ html, body{
   width: 99%;
 }
 #download {
-    padding: 10px 20px;
-    background: #31a700;
-    color: #ffffff;
-    font-size: 1.4em;
-    border-radius: 50px;
-    outline: none;
-    border-width: 0px;
     cursor: pointer;
+    border-style: none;
+    background: none;
 }
 #download[disabled]{
-  background: #CCC;
-  color: #EEE;
-  border: none;
-  border-width: 0px;
+  opacity: 0.7;
   cursor: not-allowed;
 }
 .design{
@@ -64,4 +58,30 @@ html, body{
   .design{
     height: 70px;
   }
+}
+.title {
+  width: 40%;
+  margin-top: 6vh;
+  margin-bottom: 8vh;
+}
+.file-input-box {
+  display: flex;
+  flex-direction: row;
+}
+.file-input-box #no-file {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 6vh 0 0 -2vw;
+  word-spacing: 1px;
+}
+.file-input {
+  margin-left: 3vw;
+  margin-top: 3vh;
+}
+.file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.file-input::before {
+  content: url(./button-selectfile.png);
 }

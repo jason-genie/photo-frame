@@ -5,7 +5,7 @@ window.mobileCheck = function() {
   return check;
 };
 
-var ratioCanWin = (mobileCheck() == true) ? 0.9 : 0.5;
+var ratioCanWin = (mobileCheck() == true) ? 0.5 : 0.1;
 var defaultWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 var cw = (defaultWidth * ratioCanWin) > 350 ? (defaultWidth * ratioCanWin) : 350;
 var canvas = new fabric.Canvas('preview_panel', {width: cw, height:cw / 620 * 874});
@@ -37,7 +37,7 @@ window.updatePreview = function(url) {
   fabric.Image.fromURL(url, function(img) {
     // Calc resize ratio to fit any overlay images to width or height of canvas
     var resizeRatio = (canvas.width / img.width) >  (canvas.height / img.height) ? (canvas.width / img.width) : (canvas.height / img.height);
-    if (mobileCheck) {
+    if (mobileCheck()) {
       canvas.overlayImage.opacity = 0.4;
       canvas.renderAll();
       setTimeout(function(){canvas.overlayImage.opacity = 1; canvas.renderAll();}, 5000);
@@ -59,6 +59,7 @@ window.updatePreview = function(url) {
  */
 window.onFileChange = function(input){
   if (input.files && input.files[0]) {
+    document.getElementById("no-file").style.display = 'none';
     var reader = new FileReader();
     filename = input.files[0].name;
     reader.onload = function (e) {
@@ -96,6 +97,10 @@ window.freshCanvas = function(){
 $(document).ready(function(){
   freshCanvas();
 
+  if (mobileCheck()) {
+    $(".title").css("width", "80%");
+    $("#download img").css("width", "80%");
+  }
   /** Change overlay(frame) image */
   $(".design").on("click", function(){
     $("#fg").attr("src", $(this).attr("src")).data("design", $(this).data("design"));

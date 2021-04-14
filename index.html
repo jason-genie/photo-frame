@@ -14,16 +14,16 @@
 <body>
     <div id="wrapper">
         <div id="content">
-           <img src="assets/title.png" width="80%">
+           <img class="title" src="assets/title.png">
             <canvas id="preview_panel">
             </canvas>
-          
-            <input type="file" name="file" onchange="onFileChange(this)">
-            
-              <p>
-                <button id="download" disabled="">Selfie-Postkarte jetzt herunterladen</button>
-            </p>
-            
+            <div class="file-input-box">
+                <input class="file-input" type="file" name="file" onchange="onFileChange(this)">
+                <h5 id="no-file">Keine Datei ausgewählt</h5>
+            </div>
+            <button id="download" disabled="">
+                <img alt="Selfie-Postkarte jetzt herunterladen" src="./assets/button.png">
+            </button>
             <div id="designs" style="display:none;">
                 <img class="design active" src="./assets/postkarte-0.png" data-design="0">
                 <img class="design" src="./assets/postkarte-1.png" data-design="1">
