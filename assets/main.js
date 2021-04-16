@@ -9,7 +9,7 @@ var ratioCanWin = (mobileCheck() == true) ? 0.5 : 0.1;
 var defaultWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 var cw = (defaultWidth * ratioCanWin) > 350 ? (defaultWidth * ratioCanWin) : 350;
 var canvas = new fabric.Canvas('preview_panel', {width: cw, height:cw / 620 * 874});
-var filename = 'filename.png';
+var filename = 'filename';
 var imgMultiplier = 1;
 var imgRatio = 1;
 var ocw = cw;
@@ -21,7 +21,7 @@ var och = cw / 620 * 874;
  */
 window.download = function() {
   var link = document.createElement('a');
-  link.download = filename;
+  link.download = filename + '.png';
   link.href = canvas.toDataURL(
     { format: 'png', multiplier: 1/imgMultiplier }
   );
@@ -61,7 +61,7 @@ window.onFileChange = function(input){
   if (input.files && input.files[0]) {
     document.getElementById("no-file").style.display = 'none';
     var reader = new FileReader();
-    filename = input.files[0].name;
+    filename = input.files[0].name.split('.').slice(0, -1).join('.');
     reader.onload = function (e) {
       image = new Image();
       image.onload = function() {
