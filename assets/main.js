@@ -9,7 +9,7 @@ var ratioCanWin = (mobileCheck() == true) ? 0.5 : 0.1;
 var defaultWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 var cw = (defaultWidth * ratioCanWin) > 350 ? (defaultWidth * ratioCanWin) : 350;
 var canvas = new fabric.Canvas('preview_panel', {width: cw, height:cw / 620 * 874});
-var filename = 'filename';
+var filename = 'filename.png';
 var imgMultiplier = 1;
 var imgRatio = 1;
 var ocw = cw;
@@ -38,12 +38,13 @@ window.updatePreview = function(url) {
     // Calc resize ratio to fit any overlay images to width or height of canvas
     var resizeRatio = (canvas.width / img.width) >  (canvas.height / img.height) ? (canvas.width / img.width) : (canvas.height / img.height);
     if (mobileCheck()) {
-      canvas.overlayImage.opacity = 0.4;
+      canvas.overlayImage.opacity = 0.2;
       canvas.renderAll();
       setTimeout(function(){canvas.overlayImage.opacity = 1; canvas.renderAll();}, 5000);
     }
-    var oImg = img.set({ left: 0, top: 0, cornerColor: 'red'}).scale(resizeRatio);
+    var oImg = img.set({ left: 50, top: 230, cornerColor: 'red', cornerSize: 25, transparentCorners: false, borderColor: 'red'}).scale(resizeRatio / 2.5);
     canvas.add(oImg);
+    canvas.setActiveObject(oImg); 
   });
 
   // When click download button, download canvas image

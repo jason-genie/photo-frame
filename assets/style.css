@@ -60,9 +60,9 @@ html, body{
   }
 }
 .title {
-  width: 40%;
+  width: 50%;
   margin-top: 6vh;
-  margin-bottom: 8vh;
+  margin-bottom: 4vh;
 }
 .file-input-box {
   display: flex;
@@ -72,16 +72,22 @@ html, body{
   color: white;
   font-weight: bold;
   text-transform: uppercase;
-  margin: 6vh 0 0 -2vw;
+  margin: 4vh 0 0 -2vw;
   word-spacing: 1px;
 }
 .file-input {
-  margin-left: 3vw;
+  margin-left: 1vw;
   margin-top: 3vh;
+  margin-bottom: 2vw;
 }
 .file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
 .file-input::before {
   content: url(./button-selectfile.png);
+}
+
+.upper-canvas {
+-webkit-box-shadow: 1px 0px 38px 12px #000000; 
+box-shadow: 1px 0px 38px 12px #000000;
 }
