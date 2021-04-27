@@ -49,7 +49,19 @@ window.updatePreview = function(url) {
 
   // When click download button, download canvas image
   document.getElementById("download").onclick = function(){
-    download();
+    fabric.Image.fromURL("./assets/download.png", function(img) {
+      imgRatio = img.width / img.height;
+      var winWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+      ocw = canvas.width;
+      cw = (winWidth * ratioCanWin) > 350 ? (winWidth * ratioCanWin) : 350;
+      canvas.setWidth(cw);
+      canvas.setHeight(cw / imgRatio);
+      imgMultiplier = canvas.width / img.width;
+      var oImg = img.set({ left: 0, top: 0}).scale(imgMultiplier);
+      canvas.setOverlayImage(oImg, canvas.renderAll.bind(canvas));
+      download();
+      freshCanvas();
+    });
   };
   document.getElementById("download").removeAttribute("disabled");
 };
